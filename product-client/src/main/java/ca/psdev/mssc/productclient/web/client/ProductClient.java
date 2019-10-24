@@ -26,10 +26,28 @@ public class ProductClient {
         this.restTemplate = templateBuilder.build();
     }
 
+    protected String getEndpoint() {
+        return getEndpoint("");
+    }
+
+    protected String getEndpoint(String path) {
+        return getApiHost() + PATH_V1 + (path.isEmpty() ? "" : "/") + path;
+    }
+
     public Product getProduct(UUID uuid) {
-        ResponseEntity<Product> result = restTemplate.getForEntity(getApiHost() + PATH_V1 + "/" + uuid, Product.class);
+        ResponseEntity<Product> result = restTemplate.getForEntity(getEndpoint(uuid.toString()), Product.class);
         if (!result.hasBody()) {
             throw new RuntimeException("Unable to fetch product " + uuid);
+        }
+        return result.getBody();
+    }
+
+    public Product newProduct(String productName) {
+        Product product = Product.builder().name(productName).build();
+
+        ResponseEntity<Product> result = restTemplate.postForEntity(getEndpoint(), product, Product.class);
+        if (!result.hasBody()) {
+            throw new RuntimeException("Unable to create product " + productName);
         }
         return result.getBody();
     }

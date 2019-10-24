@@ -20,4 +20,12 @@ class ProductClientTest {
         Product product = productClient.getProduct(UUID.randomUUID());
         assertNotNull(product);
     }
+
+    @Test
+    void shouldCreateAProduct() {
+        Product product = productClient.newProduct("Demo Product");
+        assertNotNull(product);
+        assertNotNull(product.getUuid());
+        assertEquals("Demo Product", product.getName());
+    }
 }
