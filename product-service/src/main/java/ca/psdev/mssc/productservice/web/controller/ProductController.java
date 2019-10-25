@@ -1,6 +1,7 @@
 package ca.psdev.mssc.productservice.web.controller;
 
-import ca.psdev.mssc.productservice.web.model.Product;
+import ca.psdev.mssc.productservice.domain.Product;
+import ca.psdev.mssc.productservice.web.model.ProductDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +13,13 @@ import java.util.UUID;
 public class ProductController {
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> get(@PathVariable("id") UUID productId) {
+    public ResponseEntity<ProductDto> get(@PathVariable("id") UUID productId) {
         // TODO Add real implementation
-        return new ResponseEntity<>(Product.builder().uuid(productId).build(), HttpStatus.OK);
+        return new ResponseEntity<ProductDto>(ProductDto.builder().uuid(productId).build(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody Product product) {
+    public ResponseEntity<ProductDto> create(@RequestBody ProductDto product) {
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -27,7 +28,7 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<Product> update(@RequestBody Product product) {
+    public ResponseEntity<ProductDto> update(@RequestBody ProductDto product) {
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

@@ -1,6 +1,6 @@
 package ca.psdev.mssc.productservice.web.controller;
 
-import ca.psdev.mssc.productservice.web.model.Product;
+import ca.psdev.mssc.productservice.web.model.ProductDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ class ProductControllerTest {
 
     @Test
     void create() throws Exception {
-        Product product = Product.builder().build();
+        ProductDto product = ProductDto.builder().build();
         String productJson = objectMapper.writeValueAsString(product);
 
         mockMvc.perform(post("/api/v1/product")
@@ -43,7 +43,7 @@ class ProductControllerTest {
 
     @Test
     void update() throws Exception {
-        Product product = Product.builder().build();
+        ProductDto product = ProductDto.builder().build();
         String productJson = objectMapper.writeValueAsString(product);
 
         mockMvc.perform(put("/api/v1/product")

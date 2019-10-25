@@ -1,26 +1,28 @@
 package ca.psdev.mssc.productservice.web.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import lombok.*;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-@Data
+@Builder
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Product {
+public class ProductDto implements Serializable {
 
     private UUID uuid;
-    private int version;
+    private long version;
     private OffsetDateTime createDate;
     private OffsetDateTime updateDate;
     private String name;
-    private ProductType productType;
+    private String productType;
     private String upc;
     private BigDecimal price;
     private int quantity;

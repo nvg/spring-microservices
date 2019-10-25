@@ -5,13 +5,13 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public class ProductPage extends PageImpl<Product> {
+public class ProductPage extends PageImpl<ProductDto> {
 
-    public ProductPage(List<Product> content, Pageable pageable, long total) {
+    public ProductPage(List<ProductDto> content, Pageable pageable, long total) {
         super(content, pageable, total);
     }
 
-    public ProductPage(List<Product> content) {
+    public ProductPage(List<ProductDto> content) {
         super(content);
     }
 }
