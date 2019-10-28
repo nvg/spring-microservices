@@ -2,7 +2,9 @@ package ca.psdev.mssc.productservice.web.model;
 
 
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -21,6 +23,7 @@ public class ProductDto implements Serializable {
     private long version;
     private OffsetDateTime createDate;
     private OffsetDateTime updateDate;
+    @NotBlank
     private String name;
     private String productType;
     private String upc;

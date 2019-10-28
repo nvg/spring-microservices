@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -32,6 +34,7 @@ public class Product {
     private OffsetDateTime createDate;
     @UpdateTimestamp
     private OffsetDateTime updateDate;
+    @NotBlank
     private String name;
     private ProductType productType;
     private String upc;

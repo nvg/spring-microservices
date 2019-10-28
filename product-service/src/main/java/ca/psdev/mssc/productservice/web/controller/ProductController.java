@@ -1,21 +1,31 @@
 package ca.psdev.mssc.productservice.web.controller;
 
-import ca.psdev.mssc.productservice.domain.Product;
+import ca.psdev.mssc.productservice.mapper.ProductMapper;
+import ca.psdev.mssc.productservice.repo.ProductRepo;
 import ca.psdev.mssc.productservice.web.model.ProductDto;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
+@Data
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductController {
 
+    @Autowired
+    private ProductRepo productRepo;
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> get(@PathVariable("id") UUID productId) {
-        // TODO Add real implementation
-        return new ResponseEntity<ProductDto>(ProductDto.builder().uuid(productId).build(), HttpStatus.OK);
+        return productRepo.findById(productId)
+                .map(ProductMapper.INSTANCE::toProductDto)
+                .map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
+                .orElse(new ResponseEntity<ProductDto>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
@@ -28,7 +38,7 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<ProductDto> update(@RequestBody ProductDto product) {
+    public ResponseEntity<ProductDto> update(@RequestBody @Valid ProductDto product) {
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -36,9 +46,3 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }
-
-
-
-
-
-
