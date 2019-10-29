@@ -1,14 +1,17 @@
 package ca.psdev.mssc.productclient.web.client;
 
 import ca.psdev.mssc.productservice.web.model.Product;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@Tag("integration")
 @SpringBootTest
 class ProductClientTest {
 
