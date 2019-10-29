@@ -1,0 +1,33 @@
+= Spring Cloud Product Orider Microservice
+
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+Product order application to demonstrate cloud-native development with Spring 5.
+
+== Get Product Endpoint
+
+.request
+include::{snippets}/v1/product-get/http-request.adoc[]
+
+.response
+include::{snippets}/v1/product-get/http-response.adoc[]
+
+== New Product Endpoint
+
+.request
+include::{snippets}/v1/product-post/http-request.adoc[]
+
+.response
+include::{snippets}/v1/product-post/http-response.adoc[]
+
+
+== Update Product Endpoint
+
+
+.request
+include::{snippets}/v1/product-update/http-request.adoc[]
+
+.response
+include::{snippets}/v1/product-update/http-response.adoc[]

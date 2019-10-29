@@ -4,32 +4,28 @@ import ca.psdev.mssc.productservice.domain.Product;
 import ca.psdev.mssc.productservice.repo.ProductRepo;
 import ca.psdev.mssc.productservice.web.model.ProductDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doReturn;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@AutoConfigureRestDocs(uriHost = "product-service-demo")
+@ExtendWith(RestDocumentationExtension.class)
 @WebMvcTest(ProductController.class)
 class ProductControllerTest {
 
@@ -47,9 +43,12 @@ class ProductControllerTest {
         UUID uuid = UUID.randomUUID();
         given(productRepo.findById(uuid)).willReturn(Optional.of(Product.builder().uuid(uuid).build()));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/product/" + uuid)
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/product/{productId}", uuid)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(MockMvcRestDocumentation.document("v1/product-get", pathParameters(
+                        parameterWithName("productId").description("Identifier of the product to retrieve")
+                )));
     }
 
     @Test
@@ -57,10 +56,11 @@ class ProductControllerTest {
         ProductDto product = ProductDto.builder().build();
         String productJson = objectMapper.writeValueAsString(product);
 
-        mockMvc.perform(post("/api/v1/product")
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/v1/product")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productJson))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andDo(MockMvcRestDocumentation.document("v1/product-post"));
     }
 
     @Test
@@ -70,9 +70,10 @@ class ProductControllerTest {
                 .build();
         String productJson = objectMapper.writeValueAsString(product);
 
-        mockMvc.perform(put("/api/v1/product")
+        mockMvc.perform(RestDocumentationRequestBuilders.put("/api/v1/product")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productJson))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(MockMvcRestDocumentation.document("v1/product-update"));
     }
 }

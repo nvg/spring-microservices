@@ -6,13 +6,17 @@ import ca.psdev.mssc.productservice.web.model.ProductDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -26,6 +30,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@AutoConfigureRestDocs
+@ExtendWith(RestDocumentationExtension.class)
 @WebMvcTest(ProductsController.class)
 class ProductsControllerTest {
 
@@ -49,7 +55,7 @@ class ProductsControllerTest {
         given(productRepo.findAll(any(Pageable.class))).willReturn(page);
         given(productRepo.count()).willReturn(1l);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/products")
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/products")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
