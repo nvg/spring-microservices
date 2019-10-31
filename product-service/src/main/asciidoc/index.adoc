@@ -1,4 +1,4 @@
-= Spring Cloud Product Orider Microservice
+= Spring Cloud Product Microservice
 
 :doctype: book
 :icons: font

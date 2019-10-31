@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureRestDocs(uriHost = "product-service-demo")
 @ExtendWith(RestDocumentationExtension.class)
-@WebMvcTest(ProductController.class)
+@WebMvcTest(ProductsController.class)
 class ProductControllerTest {
 
     @Autowired
@@ -40,10 +40,9 @@ class ProductControllerTest {
 
     @Test
     void shouldCompleteGetOperation() throws Exception {
-        UUID uuid = UUID.randomUUID();
-        given(productRepo.findById(uuid)).willReturn(Optional.of(Product.builder().uuid(uuid).build()));
+        UUID uuid = setupNewProductWithUUID();
 
-        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/product/{productId}", uuid)
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/products/{productId}", uuid)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(MockMvcRestDocumentation.document("v1/product-get", pathParameters(
@@ -51,12 +50,18 @@ class ProductControllerTest {
                 )));
     }
 
+	private UUID setupNewProductWithUUID() {
+		UUID uuid = UUID.randomUUID();
+        given(productRepo.findById(uuid)).willReturn(Optional.of(Product.builder().uuid(uuid).build()));
+		return uuid;
+	}
+
     @Test
     void create() throws Exception {
         ProductDto product = ProductDto.builder().build();
         String productJson = objectMapper.writeValueAsString(product);
 
-        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/v1/product")
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/v1/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productJson))
                 .andExpect(status().isCreated())
@@ -65,12 +70,15 @@ class ProductControllerTest {
 
     @Test
     void update() throws Exception {
+        UUID uuid = setupNewProductWithUUID();
+
         ProductDto product = ProductDto.builder()
-                .name("Demo")
+        		.uuid(uuid)
+                .name("Updated Demo")
                 .build();
         String productJson = objectMapper.writeValueAsString(product);
 
-        mockMvc.perform(RestDocumentationRequestBuilders.put("/api/v1/product")
+        mockMvc.perform(RestDocumentationRequestBuilders.put("/api/v1/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productJson))
                 .andExpect(status().isOk())

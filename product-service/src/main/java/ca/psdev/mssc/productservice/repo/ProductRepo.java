@@ -6,4 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.UUID;
 
 public interface ProductRepo extends PagingAndSortingRepository<Product, UUID> {
+
+    Product findByUpc(String upc);
+
 }
