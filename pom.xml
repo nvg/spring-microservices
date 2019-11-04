@@ -12,6 +12,7 @@
   <name>product</name>
   
   <modules>
+    <module>product-bom</module>
     <module>product-service</module>
 	<module>product-order-service</module>
 	<module>product-inventory-service</module>
