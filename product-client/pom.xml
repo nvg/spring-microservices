@@ -6,7 +6,6 @@
 		<groupId>ca.psdev.mssc</groupId>
 		<artifactId>product-bom</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath />
 	</parent>
 	
     <artifactId>product-client</artifactId>
