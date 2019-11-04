@@ -2,20 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
 		<groupId>ca.psdev.mssc</groupId>
 		<artifactId>product-bom</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>../product-bom/pom.xml</relativePath>
 	</parent>
 	
     <artifactId>product-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>product-client</name>
     <description>Demo project for Spring Boot</description>
-
-    <properties>
-        <java.version>13</java.version>
-    </properties>
 
     <dependencies>
         <dependency>
