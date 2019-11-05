@@ -1,14 +1,20 @@
 package ca.psdev.mssc.productservice.web.model;
 
 
-import lombok.*;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
+
+import javax.validation.constraints.NotBlank;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @Getter
@@ -19,7 +25,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ProductDto implements Serializable {
 
-    private UUID uuid;
+	private static final long serialVersionUID = 1L;
+	
+	private UUID uuid;
     private long version;
     private OffsetDateTime createDate;
     private OffsetDateTime updateDate;

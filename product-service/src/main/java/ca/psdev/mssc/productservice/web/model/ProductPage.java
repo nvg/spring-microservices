@@ -7,11 +7,13 @@ import java.util.List;
 
 public class ProductPage extends PageImpl<ProductDto> {
 
-    public ProductPage(List<ProductDto> content, Pageable pageable, long total) {
-        super(content, pageable, total);
-    }
+	private static final long serialVersionUID = 1L;
 
-    public ProductPage(List<ProductDto> content) {
-        super(content);
-    }
+	public ProductPage(List<ProductDto> content, Pageable pageable, long total) {
+		super(content, pageable, total);
+	}
+
+	public ProductPage(List<ProductDto> content) {
+		super(content);
+	}
 }

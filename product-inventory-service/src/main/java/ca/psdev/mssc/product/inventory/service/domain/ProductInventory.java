@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class ProductInventory extends BaseEntity{
+public class ProductInventory extends BaseEntity {
 
     @Builder
     public ProductInventory(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, UUID productId,
