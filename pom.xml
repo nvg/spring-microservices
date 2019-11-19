@@ -17,6 +17,7 @@
 	<module>product-order-service</module>
 	<module>product-inventory-service</module>
     <module>product-client</module>
+	<module>product-events</module>
     <module>product-jms</module>
   </modules>
 

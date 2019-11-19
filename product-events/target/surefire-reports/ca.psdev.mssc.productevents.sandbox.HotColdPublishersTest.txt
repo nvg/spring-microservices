@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ca.psdev.mssc.productevents.sandbox.HotColdPublishersTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.487 s - in ca.psdev.mssc.productevents.sandbox.HotColdPublishersTest

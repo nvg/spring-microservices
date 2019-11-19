@@ -1,0 +1,4 @@
+ca\psdev\mssc\productevents\web\controllers\DemoReactiveController.class
+ca\psdev\mssc\productevents\ProductEventsApplication.class
+ca\psdev\mssc\productevents\web\handlers\DemoHandlerFunction.class
+ca\psdev\mssc\productevents\web\routers\RouterFunctionConfig.class
